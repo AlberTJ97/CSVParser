@@ -2,12 +2,14 @@ package IO;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+
+import Elements.PairDateValue;
 
 public class DataReader {	
 	private int csvAttributeIndex;
@@ -37,8 +39,8 @@ public class DataReader {
 		return this.recordList.get(0).get(this.csvAttributeIndex);
 	}
 	
-	public TreeMap<String, String> getRawAttribute() throws IOException {
-		TreeMap<String, String> dateAttributeValueMap = new TreeMap<String, String>();
+	public ArrayList<PairDateValue> getRawAttribute() throws IOException {
+		ArrayList<PairDateValue> pairDateValueArray = new ArrayList<PairDateValue>();
 		
 		boolean startRecord = true;
 		for (CSVRecord csvRecord : this.recordList) {
@@ -46,12 +48,12 @@ public class DataReader {
 				startRecord = !startRecord;
 			}
 			else {
-				dateAttributeValueMap.put(csvRecord.get(0), csvRecord.get(this.csvAttributeIndex));				
+				pairDateValueArray.add(new PairDateValue(csvRecord.get(0), csvRecord.get(this.csvAttributeIndex)));				
 			}
 		 }
 		
 		
-		return dateAttributeValueMap;
+		return pairDateValueArray;
 	}
 
 	/**

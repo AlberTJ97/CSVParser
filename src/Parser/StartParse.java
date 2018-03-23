@@ -1,7 +1,6 @@
 package Parser;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,28 +13,6 @@ import IO.DataReader;
 public class StartParse {
 	
 	private static ArrayList<String> commonAttributes;
-	
-	public static void main(String[] args) throws IOException {
-		File zoneFolder = new File(args[0]);
-		File[] listOfStationFolder = zoneFolder.listFiles();		
-		Zone zone = new Zone(zoneFolder.getName());
-		commonAttributes = new ArrayList<String>();
-		
-		// Get the zone common attributes
-		for (File stationFolder: listOfStationFolder) {
-			if (stationFolder.isFile()) {
-				readCommonAttributes(stationFolder);
-			}
-		}
-		
-		// Read all the stations in the zone.
-		for (File stationFolder: listOfStationFolder) {
-			if (stationFolder.isDirectory()) {
-				zone.add(processStation(stationFolder));				
-			}
-		}
-		System.out.println(zone);
-	}
 
 	/**
 	 * @throws IOException 
@@ -59,6 +36,7 @@ public class StartParse {
 		
 		for (File stationCSV: stationCSVFolder.listFiles()) {
 			DataReader reader = new DataReader(stationCSV.getAbsolutePath());
+			
 			while(reader.areMoreAttributes()) {
 				String attributeName = reader.getRawAttributeName();
 				for (String acceptedAttribute : commonAttributes) {
@@ -70,6 +48,29 @@ public class StartParse {
 		}
 		
 		return station;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		File zoneFolder = new File(args[0]);
+		File[] listOfStationFolder = zoneFolder.listFiles();		
+		Zone zone = new Zone(zoneFolder.getName());
+		commonAttributes = new ArrayList<String>();
+		
+		// Get the zone common attributes
+		for (File stationFolder: listOfStationFolder) {
+			if (stationFolder.isFile()) {
+				readCommonAttributes(stationFolder);
+			}
+		}
+		
+		// Read all the stations in the zone.
+		for (File stationFolder: listOfStationFolder) {
+			if (stationFolder.isDirectory()) {
+				zone.add(processStation(stationFolder));				
+			}
+		}
+		
+		System.out.println(zone.getMeanStation());
 	}
 
 }

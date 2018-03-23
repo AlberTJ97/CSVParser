@@ -1,6 +1,5 @@
 package Elements;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class Station {
 
@@ -18,6 +17,7 @@ public class Station {
 	 */
 	public void addAttribute(Attribute newAttribute) {
 		this.getAttributeArray().add(newAttribute);		
+		this.getAttributeArray().sort(null);
 	}
 	
 	public String toString() {
@@ -39,7 +39,7 @@ public class Station {
 	/**
 	 * @return the attributeArray
 	 */
-	private ArrayList<Attribute> getAttributeArray() {
+	public ArrayList<Attribute> getAttributeArray() {
 		return attributeArray;
 	}
 }
