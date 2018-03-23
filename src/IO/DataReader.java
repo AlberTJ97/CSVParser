@@ -40,11 +40,24 @@ public class DataReader {
 	public TreeMap<String, String> getRawAttribute() throws IOException {
 		TreeMap<String, String> dateAttributeValueMap = new TreeMap<String, String>();
 		
+		boolean startRecord = true;
 		for (CSVRecord csvRecord : this.recordList) {
-			dateAttributeValueMap.put(csvRecord.get(0), csvRecord.get(this.csvAttributeIndex));
+			if (startRecord) { // Don't introduce header.
+				startRecord = !startRecord;
+			}
+			else {
+				dateAttributeValueMap.put(csvRecord.get(0), csvRecord.get(this.csvAttributeIndex));				
+			}
 		 }
 		
-		this.csvAttributeIndex += 2;
+		
 		return dateAttributeValueMap;
+	}
+
+	/**
+	 * 
+	 */
+	public void nextAttribute() {
+		this.csvAttributeIndex += 2;		
 	}
 }

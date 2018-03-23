@@ -17,4 +17,11 @@ public class Attribute {
 		}
 		return resultString + "]";
 	}
+
+	/**
+	 * @return the attributeName
+	 */
+	public String getAttributeName() {
+		return attributeName;
+	}
 }

@@ -16,8 +16,8 @@ public class Station {
 	 * @param attributeName
 	 * @param attribute
 	 */
-	public void addAttribute(String attributeName, TreeMap<String, String> attribute) {
-		this.getAttributeArray().add(new Attribute(attributeName, attribute));		
+	public void addAttribute(Attribute newAttribute) {
+		this.getAttributeArray().add(newAttribute);		
 	}
 	
 	public String toString() {
