@@ -1,23 +1,20 @@
 package Elements;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Attribute {
 	private String attributeName;
-	private HashMap<String, Double> valueArray;
+	private TreeMap<String, String> valueArray;
 
-	public Attribute(String attributeName) {
+	public Attribute(String attributeName, TreeMap<String, String> attribute) {
 		this.attributeName = attributeName;
-		this.valueArray = new HashMap<String, Double>();
-	}
-	
-	public void addAttribute(String date, Double value) {
-		this.valueArray.put(date, value);
+		this.valueArray = attribute;
 	}
 	
 	public String toString() {
-		for (String a : this.valueArray.keySet()) {
-			System.out.println(a);
+		String resultString = this.attributeName + " : [";
+		for (String value : this.valueArray.values()) {
+			resultString += value + ", ";
 		}
-		return "";
+		return resultString + "]";
 	}
 }

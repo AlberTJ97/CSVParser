@@ -1,9 +1,7 @@
 package IO;
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -11,9 +9,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-public class DataReader {
-	private BufferedReader reader;
-	
+public class DataReader {	
 	private int csvAttributeIndex;
 	private List<CSVRecord> recordList;
 	private CSVRecord dateList;
@@ -37,11 +33,11 @@ public class DataReader {
 		return (this.csvAttributeIndex < this.dateList.size());
 	}
 	
-	public String getAttributeName() {
+	public String getRawAttributeName() {
 		return this.recordList.get(0).get(this.csvAttributeIndex);
 	}
 	
-	public TreeMap<String, String> getAttribute() throws IOException {
+	public TreeMap<String, String> getRawAttribute() throws IOException {
 		TreeMap<String, String> dateAttributeValueMap = new TreeMap<String, String>();
 		
 		for (CSVRecord csvRecord : this.recordList) {

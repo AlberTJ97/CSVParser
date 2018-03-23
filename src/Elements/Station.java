@@ -1,6 +1,6 @@
 package Elements;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Station {
 
@@ -11,8 +11,35 @@ public class Station {
 		this.stationName = stationName;
 		this.attributeArray = new ArrayList<Attribute>();
 	}
+
+	/**
+	 * @param attributeName
+	 * @param attribute
+	 */
+	public void addAttribute(String attributeName, TreeMap<String, String> attribute) {
+		this.getAttributeArray().add(new Attribute(attributeName, attribute));		
+	}
 	
-//	public addAtribute() {
-//		
-//	}	
+	public String toString() {
+		String resultString = "\tList of Attributes for Station " + this.getStationName() + System.lineSeparator();
+		for (Attribute attribute : this.attributeArray) {
+			resultString += "\t\t" + attribute + System.lineSeparator();
+		}
+		
+		return resultString;
+	}
+
+	/**
+	 * @return the stationName
+	 */
+	private String getStationName() {
+		return stationName;
+	}
+
+	/**
+	 * @return the attributeArray
+	 */
+	private ArrayList<Attribute> getAttributeArray() {
+		return attributeArray;
+	}
 }
