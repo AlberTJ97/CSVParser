@@ -67,8 +67,8 @@ public class Attribute implements Comparable<Attribute> {
 	/**
 	 * @return the valueArray
 	 */
-	public ArrayList<PairDateValue> getPairDateValueArray() {
-		return pairDateValueArray;
+	public PairDateValue getPairDateValueAt(int index) {
+		return pairDateValueArray.get(index);
 	}
 
 	/*
@@ -78,7 +78,7 @@ public class Attribute implements Comparable<Attribute> {
 	 */
 	public String toString() {
 		String resultString = this.attributeName + " : [";
-		for (PairDateValue pairDateValue : this.getPairDateValueArray()) {
+		for (PairDateValue pairDateValue : this.pairDateValueArray) {
 			resultString += pairDateValue.getValue() + ", ";
 		}
 		return resultString + "]";
@@ -99,6 +99,13 @@ public class Attribute implements Comparable<Attribute> {
 	@Override
 	public int compareTo(Attribute anotherAttribute) {
 		return this.getAttributeName().compareTo(anotherAttribute.getAttributeName());
+	}
+
+	/**
+	 * @return
+	 */
+	public int getElementNumber() {
+		return this.pairDateValueArray.size();
 	}
 
 }

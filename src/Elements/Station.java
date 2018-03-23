@@ -29,8 +29,8 @@ public class Station {
 	 * @param attribute
 	 */
 	public void addAttribute(Attribute newAttribute) {
-		this.getAttributeArray().add(newAttribute);
-		this.getAttributeArray().sort(null);
+		this.attributeArray.add(newAttribute);
+		this.attributeArray.sort(null);
 	}
 
 	/*
@@ -57,7 +57,14 @@ public class Station {
 	/**
 	 * @return the attributeArray
 	 */
-	public ArrayList<Attribute> getAttributeArray() {
-		return attributeArray;
+	public Attribute getAttributeAt(int index) {
+		return attributeArray.get(index);
+	}
+
+	/**
+	 * @return
+	 */
+	public int getAttributeNumber() {
+		return attributeArray.size();
 	}
 }
