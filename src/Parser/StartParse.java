@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import Elements.Attribute;
 import Elements.Station;
 import Elements.Zone;
-import IO.DataReader;
+import IO.AirDataReader;
+import IO.VehicleDataReader;
 
 /**
  * Class that starts the parsing. It receives in the main method the name of the
@@ -48,7 +49,7 @@ public class StartParse {
 		Station station = new Station(stationCSVFolder.getName());
 
 		for (File stationCSV : stationCSVFolder.listFiles()) {
-			DataReader reader = new DataReader(stationCSV.getAbsolutePath());
+			AirDataReader reader = new AirDataReader(stationCSV.getAbsolutePath());
 
 			while (reader.areMoreAttributes()) {
 				String attributeName = reader.getRawAttributeName();
@@ -77,11 +78,17 @@ public class StartParse {
 		File[] listOfStationFolder = zoneFolder.listFiles();
 		Zone zone = new Zone(zoneFolder.getName());
 		commonAttributes = new ArrayList<String>();
+		String vehicleDataFilename = "";
 
 		// Get the zone common attributes
 		for (File stationFolder : listOfStationFolder) {
 			if (stationFolder.isFile()) {
-				readCommonAttributes(stationFolder);
+				if (stationFolder.getName().equals("common_attributes")) {
+					readCommonAttributes(stationFolder);					
+				}
+				else {
+					vehicleDataFilename = stationFolder.getAbsolutePath();
+				}
 			}
 		}
 
@@ -91,8 +98,21 @@ public class StartParse {
 				zone.add(processStation(stationFolder));
 			}
 		}
-
-		System.out.println(zone.getMeanStation());
+		
+		Station meanStation = zone.getMeanStation();
+		
+		// Read the vehicle data
+		if (!vehicleDataFilename.isEmpty()) {
+			VehicleDataReader vehicleDataReader = new VehicleDataReader(vehicleDataFilename);
+			while (vehicleDataReader.areMoreAttributes()) {
+				String attributeName = vehicleDataReader.getRawAttributeName();
+				//System.out.println(attributeName);
+				//meanStation.addAttribute(new Attribute(vehicleDataReader.getRawAttributeName(), vehicleDataReader.getRawAttribute()));
+				vehicleDataReader.nextAttribute();
+			}
+		}		
+		
+		System.out.println(meanStation);
 	}
 
 }

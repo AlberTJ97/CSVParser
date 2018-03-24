@@ -15,13 +15,13 @@ import Elements.PairDateValue;
 /**
  * Reader of the data from a CSV. It uses the API Apache Commons CSV.
  */
-public class DataReader {
+public class AirDataReader {
 	/** csvAttributeIndex */
 	private int csvAttributeIndex;
 	/** recordList */
 	private List<CSVRecord> recordList;
 	/** dateList */
-	private CSVRecord dateList;
+	private CSVRecord attributeList;
 
 	/**
 	 * Save the records of the CSV.
@@ -29,12 +29,12 @@ public class DataReader {
 	 * @param filename
 	 * @throws IOException
 	 */
-	public DataReader(String filename) throws IOException {
+	public AirDataReader(String filename) throws IOException {
 		Reader csvData = new FileReader(filename);
 		CSVParser parser = CSVParser.parse(csvData, CSVFormat.RFC4180);
 
 		this.recordList = parser.getRecords();
-		this.dateList = recordList.get(0);
+		this.attributeList = recordList.get(0);
 		this.csvAttributeIndex = 1;
 
 		parser.close();
@@ -47,7 +47,7 @@ public class DataReader {
 	 * @return
 	 */
 	public boolean areMoreAttributes() {
-		return (this.csvAttributeIndex < this.dateList.size());
+		return (this.csvAttributeIndex < this.attributeList.size());
 	}
 
 	/**
