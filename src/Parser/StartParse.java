@@ -43,9 +43,9 @@ public class StartParse {
 	 * 
 	 * @param absolutePath
 	 * @return
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	private static Station processStation(File stationCSVFolder) throws IOException {
+	private static Station processStation(File stationCSVFolder) throws Exception {
 		Station station = new Station(stationCSVFolder.getName());
 
 		for (File stationCSV : stationCSVFolder.listFiles()) {
@@ -71,9 +71,9 @@ public class StartParse {
 	 * by parameter.
 	 * 
 	 * @param args
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		File zoneFolder = new File(args[0]);
 		File[] listOfStationFolder = zoneFolder.listFiles();
 		Zone zone = new Zone(zoneFolder.getName());
@@ -105,9 +105,7 @@ public class StartParse {
 		if (!vehicleDataFilename.isEmpty()) {
 			VehicleDataReader vehicleDataReader = new VehicleDataReader(vehicleDataFilename);
 			while (vehicleDataReader.areMoreAttributes()) {
-				String attributeName = vehicleDataReader.getRawAttributeName();
-				//System.out.println(attributeName);
-				//meanStation.addAttribute(new Attribute(vehicleDataReader.getRawAttributeName(), vehicleDataReader.getRawAttribute()));
+				meanStation.addAttribute(new Attribute(vehicleDataReader.getRawAttributeName(), vehicleDataReader.getRawAttribute()));
 				vehicleDataReader.nextAttribute();
 			}
 		}		

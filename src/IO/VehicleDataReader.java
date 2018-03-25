@@ -3,7 +3,6 @@ package IO;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,20 +11,27 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import Elements.PairDateValue;
+import IO.TypeEnums.DataEnum;
+import IO.TypeEnums.VehicleEnum;
+import IO.TypeEnums.VehicleFuelEnum;
 
 /**
  * Reader of the data from a CSV. It uses the API Apache Commons CSV.
  */
 public class VehicleDataReader {
+	/** START_LINE */
 	private static final int START_LINE = 6;
-	private static final int END_LINE = 46;
+	/** END_LINE */
+	private static final int END_LINE = 39;
 	/** csvAttributeIndex */
 	private int csvAttributeIndex;
+	/** csvSubAttributeIndex */
+	private int csvSubAttributeIndex;
 	/** recordList */
 	private List<CSVRecord> recordList;
-	/** dateList */
+	/** attributeList */
 	private CSVRecord attributeList;
-	private int csvSubAttributeIndex;
+	/** subAttributeList */
 	private CSVRecord subAttributeList;
 
 	/**
@@ -46,12 +52,6 @@ public class VehicleDataReader {
 		this.subAttributeList = recordList.get(1);
 		this.csvAttributeIndex = 1;
 		this.csvSubAttributeIndex = 1;
-		
-//		System.out.println(recordList.size());
-//		System.out.println(this.attributeList.size());
-//		for (String a: this.attributeList) {
-//			System.out.println(a);
-//		}
 
 		parser.close();
 		csvData.close();
@@ -68,33 +68,27 @@ public class VehicleDataReader {
 
 	/**
 	 * @return the current attribute name.
+	 * @throws Exception 
 	 */
-	public String getRawAttributeName() {
-		String currentAttributeName = this.attributeList.get(csvAttributeIndex) + " " +
-				this.subAttributeList.get(csvSubAttributeIndex);
-		return currentAttributeName;
+	public String getRawAttributeName() throws Exception {
+		String currentAttributeName = VehicleEnum.parse(this.attributeList.get(csvAttributeIndex));
+		String currentSubAttributeName = VehicleFuelEnum.parse(this.subAttributeList.get(csvSubAttributeIndex));
+		return currentAttributeName + currentSubAttributeName;
 	}
 
 	/**
 	 * Method that returns an array of all the measures for an attribute.
 	 * 
 	 * @return
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	public ArrayList<PairDateValue> getRawAttribute() throws IOException {
+	public ArrayList<PairDateValue> getRawAttribute() throws Exception {
 		ArrayList<PairDateValue> pairDateValueArray = new ArrayList<PairDateValue>();
 		
-		System.out.println(this.attributeList.get(csvAttributeIndex));
-		
-		boolean startRecord = true;
-		for (int i = START_LINE; i < END_LINE; ++i) {
-			if (startRecord) { // Don't introduce header.
-				startRecord = !startRecord;
-			}
-			else {
-				pairDateValueArray.add(new PairDateValue(this.recordList.get(i).get(0), 
-						this.recordList.get(i).get(this.csvAttributeIndex)));
-			}
+		for (int i = 3; i < END_LINE; ++i) {
+			String date = DataEnum.parse(this.recordList.get(i).get(0));
+			String value = this.recordList.get(i).get(this.csvSubAttributeIndex);
+			pairDateValueArray.add(new PairDateValue(date, value));
 		}
 		return pairDateValueArray;
 	}

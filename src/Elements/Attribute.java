@@ -34,6 +34,7 @@ public class Attribute implements Comparable<Attribute> {
 	public Attribute(String attributeName, ArrayList<PairDateValue> pairDateValueArray) {
 		this.attributeName = attributeName;
 		this.pairDateValueArray = pairDateValueArray;
+		this.pairDateValueArray.sort(null);
 	}
 
 	/**
@@ -44,6 +45,7 @@ public class Attribute implements Comparable<Attribute> {
 	 */
 	public void add(String date, String value) {
 		this.pairDateValueArray.add(new PairDateValue(date, value));
+		this.pairDateValueArray.sort(null);
 	}
 
 	/**

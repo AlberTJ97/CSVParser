@@ -10,7 +10,7 @@ package Elements;
 /**
  * Represents the date of a measure and it's value.
  */
-public class PairDateValue {
+public class PairDateValue implements Comparable<PairDateValue> {
 	/** date represents the date of the measure. */
 	private String date;
 	/** value represents the value. */
@@ -67,6 +67,24 @@ public class PairDateValue {
 	 */
 	public void setValue(Double value) {
 		this.value = value;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(PairDateValue anotherPair) {
+		String month1 = this.getDate().split("-")[0];
+		String month2 = anotherPair.getDate().split("-")[0];
+		String year1 = this.getDate().split("-")[1];
+		String year2 = anotherPair.getDate().split("-")[1];
+		
+		if (year1.compareTo(year2) != 0) {
+			return year1.compareTo(year2);
+		}
+		else {
+			return month1.compareTo(month2);
+		}
 	}
 
 }
