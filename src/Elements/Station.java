@@ -1,5 +1,7 @@
 package Elements;
 
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 
 /**
@@ -34,9 +36,32 @@ public class Station {
 			this.attributeArray.get(repeatedAttributeIndex).concat(newAttribute);
 		}
 		else {
-			this.attributeArray.add(newAttribute);			
+			this.attributeArray.add(newAttribute);
 			this.attributeArray.sort(null);
 		}
+	}
+
+	/**
+	 * Custom method for vehicles. For each month, it estimate the daily amount of vehicles.
+	 * @param attribute
+	 */
+	public void addVehicleAttribute(Attribute attribute) {
+		Attribute newAttribute = new Attribute(attribute.getAttributeName());
+		
+		for (int i = 0; i < attribute.getElementNumber(); ++i) {
+			PairDateValue attributePair = attribute.getPairDateValueAt(i);			
+			int monthLength = Month.of(attributePair.getMonth()).length(Year.isLeap(attributePair.getYear()));
+			
+			for (int j = 1; j <= monthLength; ++j) {
+				String day = (j < 10) ? ("0" + j) : String.valueOf(j);
+				String newDate = day + "-" + attributePair.getDate();
+				Double estimatedValue = attributePair.getValue() / monthLength;
+				
+				newAttribute.add(newDate, estimatedValue);
+			}
+		}		
+		
+		this.addAttribute(newAttribute);
 	}
 
 	/*

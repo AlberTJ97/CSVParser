@@ -1,8 +1,10 @@
 package Parser;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -101,16 +103,21 @@ public class StartParse {
 		
 		Station meanStation = zone.getMeanStation();
 		
-//		// Read the vehicle data
-//		if (!vehicleDataFilename.isEmpty()) {
-//			VehicleDataReader vehicleDataReader = new VehicleDataReader(vehicleDataFilename);
-//			while (vehicleDataReader.areMoreAttributes()) {
-//				meanStation.addAttribute(new Attribute(vehicleDataReader.getRawAttributeName(), vehicleDataReader.getRawAttribute()));
-//				vehicleDataReader.nextAttribute();
-//			}
-//		}		
+		// Read the vehicle data
+		if (!vehicleDataFilename.isEmpty()) {
+			VehicleDataReader vehicleDataReader = new VehicleDataReader(vehicleDataFilename);
+			while (vehicleDataReader.areMoreAttributes()) {
+				meanStation.addVehicleAttribute(new Attribute(vehicleDataReader.getRawAttributeName(), vehicleDataReader.getRawAttribute()));
+				vehicleDataReader.nextAttribute();
+			}
+		}		
 		
 		System.out.println(meanStation);
+		
+		// TODO arff Writer
+//		BufferedWriter writer = new BufferedWriter(new FileWriter("a.txt"));
+//		writer.write(meanStation.toString());
+//		writer.close();
 	}
 
 }

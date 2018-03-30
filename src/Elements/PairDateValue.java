@@ -69,7 +69,9 @@ public class PairDateValue implements Comparable<PairDateValue> {
 		this.value = value;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
@@ -78,9 +80,9 @@ public class PairDateValue implements Comparable<PairDateValue> {
 		String day2 = anotherPair.getDate().split("-")[0];
 		String month1 = this.getDate().split("-")[1];
 		String month2 = anotherPair.getDate().split("-")[1];
-		String year1 = this.getDate().split("-")[2];
-		String year2 = anotherPair.getDate().split("-")[2];
-		
+		String year1 = (this.getDate().split("-").length > 2) ? this.getDate().split("-")[2] : "";
+		String year2 = (anotherPair.getDate().split("-").length > 2) ? anotherPair.getDate().split("-")[2] : "";
+
 		if (year1.compareTo(year2) != 0) {
 			return year1.compareTo(year2);
 		}
@@ -90,6 +92,22 @@ public class PairDateValue implements Comparable<PairDateValue> {
 		else {
 			return day1.compareTo(day2);
 		}
+	}
+
+	/**
+	 * @return
+	 */
+	public int getMonth() {
+		return (this.getDate().split("-").length > 2) ? Integer.parseInt(this.getDate().split("-")[1])
+				: Integer.parseInt(this.getDate().split("-")[0]);
+	}
+
+	/**
+	 * @return
+	 */
+	public int getYear() {
+		return (this.getDate().split("-").length > 2) ? Integer.parseInt(this.getDate().split("-")[2])
+				: Integer.parseInt(this.getDate().split("-")[1]);
 	}
 
 }

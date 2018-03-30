@@ -93,8 +93,8 @@ public class Attribute implements Comparable<Attribute> {
 	public String toString() {
 		String resultString = this.attributeName + " : [";
 		for (PairDateValue pairDateValue : this.pairDateValueArray) {
-//			resultString += pairDateValue.getValue() + ", ";
-			resultString += pairDateValue.getDate() + ", ";
+			resultString += pairDateValue.getValue() + ", ";
+//			resultString += pairDateValue.getDate() + ", ";
 		}
 		return resultString + "]";
 	}
