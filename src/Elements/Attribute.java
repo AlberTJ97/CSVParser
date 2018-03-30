@@ -57,6 +57,18 @@ public class Attribute implements Comparable<Attribute> {
 	public void add(String date, Double value) {
 		this.pairDateValueArray.add(new PairDateValue(date, value));
 	}
+	
+	/**
+	 * Concat the elements with another attribute.
+	 * @param newAttribute
+	 */
+	public void concat(Attribute newAttribute) {
+		for (int i = 0; i < newAttribute.getElementNumber() ; ++i) {
+			PairDateValue newPair = newAttribute.getPairDateValueAt(i);
+			this.add(newPair.getDate(), newPair.getValue());
+		}
+		this.pairDateValueArray.sort(null);
+	}
 
 	/**
 	 * @param attributeName
@@ -81,7 +93,8 @@ public class Attribute implements Comparable<Attribute> {
 	public String toString() {
 		String resultString = this.attributeName + " : [";
 		for (PairDateValue pairDateValue : this.pairDateValueArray) {
-			resultString += pairDateValue.getValue() + ", ";
+//			resultString += pairDateValue.getValue() + ", ";
+			resultString += pairDateValue.getDate() + ", ";
 		}
 		return resultString + "]";
 	}
@@ -102,12 +115,22 @@ public class Attribute implements Comparable<Attribute> {
 	public int compareTo(Attribute anotherAttribute) {
 		return this.getAttributeName().compareTo(anotherAttribute.getAttributeName());
 	}
+	
+	/**
+	 * @param anotherAttribute
+	 * @return
+	 */
+	@Override
+	public boolean equals(Object object) {
+		Attribute anotherAttribute = (Attribute) object;
+		return (this.compareTo(anotherAttribute) == 0);
+	}
 
 	/**
 	 * @return
 	 */
 	public int getElementNumber() {
 		return this.pairDateValueArray.size();
-	}
+	}	
 
 }

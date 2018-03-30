@@ -11,7 +11,6 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import Elements.PairDateValue;
-import IO.TypeEnums.DataEnum;
 
 /**
  * Reader of the data from a CSV. It uses the API Apache Commons CSV.
@@ -36,7 +35,7 @@ public class AirDataReader {
 
 		this.recordList = parser.getRecords();
 		this.attributeList = recordList.get(0);
-		this.csvAttributeIndex = 1;
+		this.csvAttributeIndex = 2;
 
 		parser.close();
 		csvData.close();
@@ -73,12 +72,12 @@ public class AirDataReader {
 				startRecord = !startRecord;
 			}
 			else {
-				String month = csvRecord.get(0).split("-")[0];
-				month = DataEnum.getIntegerMonth(month);
-				String year = csvRecord.get(0).split("-")[1];
-				String date = month + "-" + year;
-				
-				pairDateValueArray.add(new PairDateValue(date, csvRecord.get(this.csvAttributeIndex)));
+//				String month = csvRecord.get(0).split("-")[0];
+//				month = DataEnum.getIntegerMonth(month);
+//				String year = csvRecord.get(0).split("-")[1];
+//				String date = month + "-" + year;
+//				pairDateValueArray.add(new PairDateValue(date, csvRecord.get(this.csvAttributeIndex)));
+				pairDateValueArray.add(new PairDateValue(csvRecord.get(0), csvRecord.get(this.csvAttributeIndex))); 
 			}
 		}
 		return pairDateValueArray;

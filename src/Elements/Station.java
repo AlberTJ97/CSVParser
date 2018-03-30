@@ -29,8 +29,14 @@ public class Station {
 	 * @param attribute
 	 */
 	public void addAttribute(Attribute newAttribute) {
-		this.attributeArray.add(newAttribute);
-		this.attributeArray.sort(null);
+		if (attributeArray.contains(newAttribute)) {
+			int repeatedAttributeIndex = this.attributeArray.indexOf(newAttribute);
+			this.attributeArray.get(repeatedAttributeIndex).concat(newAttribute);
+		}
+		else {
+			this.attributeArray.add(newAttribute);			
+			this.attributeArray.sort(null);
+		}
 	}
 
 	/*

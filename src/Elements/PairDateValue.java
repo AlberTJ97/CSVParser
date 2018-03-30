@@ -74,16 +74,21 @@ public class PairDateValue implements Comparable<PairDateValue> {
 	 */
 	@Override
 	public int compareTo(PairDateValue anotherPair) {
-		String month1 = this.getDate().split("-")[0];
-		String month2 = anotherPair.getDate().split("-")[0];
-		String year1 = this.getDate().split("-")[1];
-		String year2 = anotherPair.getDate().split("-")[1];
+		String day1 = this.getDate().split("-")[0];
+		String day2 = anotherPair.getDate().split("-")[0];
+		String month1 = this.getDate().split("-")[1];
+		String month2 = anotherPair.getDate().split("-")[1];
+		String year1 = this.getDate().split("-")[2];
+		String year2 = anotherPair.getDate().split("-")[2];
 		
 		if (year1.compareTo(year2) != 0) {
 			return year1.compareTo(year2);
 		}
-		else {
+		else if (month1.compareTo(month2) != 0) {
 			return month1.compareTo(month2);
+		}
+		else {
+			return day1.compareTo(day2);
 		}
 	}
 

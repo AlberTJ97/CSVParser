@@ -101,14 +101,14 @@ public class StartParse {
 		
 		Station meanStation = zone.getMeanStation();
 		
-		// Read the vehicle data
-		if (!vehicleDataFilename.isEmpty()) {
-			VehicleDataReader vehicleDataReader = new VehicleDataReader(vehicleDataFilename);
-			while (vehicleDataReader.areMoreAttributes()) {
-				meanStation.addAttribute(new Attribute(vehicleDataReader.getRawAttributeName(), vehicleDataReader.getRawAttribute()));
-				vehicleDataReader.nextAttribute();
-			}
-		}		
+//		// Read the vehicle data
+//		if (!vehicleDataFilename.isEmpty()) {
+//			VehicleDataReader vehicleDataReader = new VehicleDataReader(vehicleDataFilename);
+//			while (vehicleDataReader.areMoreAttributes()) {
+//				meanStation.addAttribute(new Attribute(vehicleDataReader.getRawAttributeName(), vehicleDataReader.getRawAttribute()));
+//				vehicleDataReader.nextAttribute();
+//			}
+//		}		
 		
 		System.out.println(meanStation);
 	}
