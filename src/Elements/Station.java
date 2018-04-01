@@ -3,6 +3,15 @@ package Elements;
 import java.time.Month;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Collections;
+
+import Pollutants.CarbonMonoxide;
+import Pollutants.NitrogenDioxide;
+import Pollutants.Ozone;
+import Pollutants.ParticularizedMaterial10;
+import Pollutants.ParticularizedMaterial25;
+import Pollutants.Pollutant;
+import Pollutants.SulphurDioxide;
 
 /**
  * Represents a collection of attributes with it's measures.
@@ -62,6 +71,33 @@ public class Station {
 		}		
 		
 		this.addAttribute(newAttribute);
+	}
+	
+	/**
+	 * Adds the Air Quality Index attribute. The pullutants attributes must be previously stored at attributeArray
+	 */
+	public void addAQIAttribute() {
+		// We assume that the pollutants attributes are in the first positions of attributeArray
+		final int FIRST_POLLUTANT_INDEX = 0;
+		final int LAST_POLLUTANT_INDEX  = 5;
+		// The pollutants are ordered alphabetically, like in attributeArray
+		final Pollutant [] pollutants = { new CarbonMonoxide(),
+				  						  new NitrogenDioxide(),
+										  new Ozone(),
+										  new ParticularizedMaterial10(),
+										  new ParticularizedMaterial25(),
+										  new SulphurDioxide() };
+		Attribute aqiAttribute = new Attribute("AQI");
+		for (int i = 0; i < attributeArray.get(FIRST_POLLUTANT_INDEX).getPairDateValue().size(); ++i) {
+			ArrayList<Double> aqi = new ArrayList<Double>();
+			for (int j = FIRST_POLLUTANT_INDEX; j <= LAST_POLLUTANT_INDEX; ++j) {
+				aqi.add(pollutants[j].calculateAssociatedAQI(attributeArray.get(j).getPairDateValueAt(i).getValue()));
+			}
+			String date = attributeArray.get(FIRST_POLLUTANT_INDEX).getPairDateValueAt(i).getDate();
+			double value = Collections.max(aqi);
+			aqiAttribute.add(date, value);
+		}
+		this.addAttribute(aqiAttribute);
 	}
 
 	/*

@@ -84,6 +84,13 @@ public class Attribute implements Comparable<Attribute> {
 	public PairDateValue getPairDateValueAt(int index) {
 		return pairDateValueArray.get(index);
 	}
+	
+	/**
+	 * @return 
+	 */
+	public ArrayList<PairDateValue> getPairDateValue() {
+		return pairDateValueArray;
+	}
 
 	/*
 	 * (non-Javadoc)

@@ -112,12 +112,15 @@ public class StartParse {
 			}
 		}		
 		
+		//Add the AQI attribute
+		meanStation.addAQIAttribute();
+		
 		System.out.println(meanStation);
 		
 		// TODO arff Writer
-//		BufferedWriter writer = new BufferedWriter(new FileWriter("a.txt"));
-//		writer.write(meanStation.toString());
-//		writer.close();
+		BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
+		writer.write(meanStation.toString());
+		writer.close();
 	}
 
 }
