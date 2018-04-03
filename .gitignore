@@ -13,6 +13,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+commons-csv-1.5.jar
+commons-csv-1.5-sources.jar
 
 # External tool builders
 .externalToolBuilders/

@@ -1,0 +1,28 @@
+AQI  	Calidad del aire 
+CO   	CO2
+NO2  	Dioxido de nitrogeno
+O3   	Ozono
+PM10 	Particulas PM10
+PM2  	Particulas PM2
+SO2  	Dioxido de azufre
+VCFD 	Camiones y furgonetas diesel
+VCFE 	Camiones y furgonetas electricos
+VCFG 	Camiones y furgonetas gasolina
+VCGD 	Camiones mas de 3.500 kg diesel
+VCGE 	Camiones mas de 3.500 kg electricos
+VCGG 	Camiones mas de 3.500 kg gasolina
+VCPD 	Camiones hasta 3.500 kg diesel
+VCPE 	Camiones hasta 3.500 kg electricos
+VCPG 	Camiones hasta 3.500 kg gasolina
+VFD 	Furgonetas diesel
+VFE 	Furgonetas electricos
+VFG 	Furgonetas gasolina
+VGD 	Guaguas diesel
+VGE 	Guaguas electricos
+VGG 	Guaguas gasolina
+VMD		Motocicletas diesel
+VME		Motocicletas electricos
+VMG		Motocicletas gasolina
+VTD		Turismos diesel
+VTE		Turismos electricos
+VTG		Turismos gasolina

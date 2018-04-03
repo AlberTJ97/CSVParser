@@ -13,6 +13,7 @@ import Elements.Station;
 import Elements.Zone;
 import IO.AirDataReader;
 import IO.VehicleDataReader;
+import Parser.ArffParser;
 
 /**
  * Class that starts the parsing. It receives in the main method the name of the
@@ -114,12 +115,10 @@ public class StartParse {
 		
 		//Add the AQI attribute
 		meanStation.addAQIAttribute();
-		
-		System.out.println(meanStation);
-		
-		// TODO arff Writer
-		BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
-		writer.write(meanStation.toString());
+				
+		ArffParser arffParse = new ArffParser(meanStation); 
+		BufferedWriter writer = new BufferedWriter(new FileWriter("CSV2ARFF.arff"));
+		writer.write(arffParse.toString());
 		writer.close();
 	}
 

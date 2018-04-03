@@ -117,7 +117,7 @@ public class Station {
 	/**
 	 * @return the stationName
 	 */
-	private String getStationName() {
+	public String getStationName() {
 		return stationName;
 	}
 
