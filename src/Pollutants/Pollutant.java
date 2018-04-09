@@ -55,7 +55,7 @@ public abstract class Pollutant {
 	 * @param level Air quality level.
 	 * @return Discretized level.
 	 */
-	public String discretizeLevel(double level) {
+	public static String discretizeLevel(double level) {
 		if (level < 0 || level > 500) {
 			throw new IllegalArgumentException("Bag argument");
 		}
